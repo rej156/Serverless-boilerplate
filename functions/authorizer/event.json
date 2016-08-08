@@ -1,0 +1,5 @@
+{
+    "type" : "TOKEN",
+    "authorizationToken" : "Bearer pFzODjpw3PxYs59O",
+    "methodArn" : "arn:aws:execute-api:*"
+}

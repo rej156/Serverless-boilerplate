@@ -11,7 +11,7 @@ var ctx
  * Child process for binary I/O.
  */
 
-var proc = child.spawn('./functions/main', { stdio: ['pipe', 'pipe', process.stderr] })
+var proc = child.spawn('./functions/hello/main', { stdio: ['pipe', 'pipe', process.stderr] })
 
 proc.on('error', function(err){
   console.error('error: %s', err)
@@ -39,7 +39,7 @@ out.on('data', function(line){
  * Handle events.
  */
 
-module.exports.hello = function(event, context) {
+module.exports.handler = function(event, context) {
   ctx = context
 
   proc.stdin.write(JSON.stringify({

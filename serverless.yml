@@ -23,22 +23,30 @@ defaults:
   region: eu-west-1
 
 # you can add packaging information here
-# package:
+package:
 #  include:
 #    - include-me.js
-  # exclude:
-  #   - .go
+  exclude:
+    - functions/hello/main.go
 #  artifact: my-service-code.zip
 
 functions:
   hello:
-    handler: functions/handler.hello
-
-#   you can add any of the following events
+    handler: functions/hello/index.handler
     events:
       - http:
          path: hello
          method: get
+         authorizer: 
+           name: authorizer
+           resultTtlInSeconds: 3600
+           identitySource: method.request.header.Authorization
+           identityValidationExpression: ^Bearer [-0-9a-zA-z\.]*$
+  authorizer:
+    handler: functions/authorizer/index.handler
+
+#   you can add any of the following events
+    
 #     - s3: ${bucket}
 #     - schedule: rate(10 minutes)
 #     - sns: greeter-topic
